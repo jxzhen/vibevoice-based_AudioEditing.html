@@ -1,0 +1,161 @@
+/* VibeVoice-based Audio Editing -- side-project site
+   Pure CSS, no external dependencies. */
+
+:root {
+    --bg: #fafbfc;
+    --fg: #1f2328;
+    --accent: #0f5132;
+    --accent-light: #d1e7dd;
+    --border: #d0d7de;
+    --caveat-bg: #fff8c5;
+    --caveat-fg: #57430b;
+    --link: #0969da;
+    --code-bg: #f6f8fa;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+                 Arial, "Microsoft YaHei", sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--fg);
+    background: var(--bg);
+}
+
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+code {
+    background: var(--code-bg);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.9em;
+}
+
+.banner {
+    background: linear-gradient(135deg, #0f5132, #198754);
+    color: white;
+    padding: 36px 0 32px 0;
+}
+
+.banner-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.banner h1 {
+    margin: 0 0 6px 0;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.banner .subtitle {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    opacity: 0.92;
+}
+
+.banner .caveat {
+    background: rgba(255, 255, 255, 0.13);
+    border-left: 4px solid #ffd33d;
+    padding: 10px 14px;
+    margin: 0;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.banner .caveat a { color: #ffd33d; }
+.banner .caveat code { background: rgba(0,0,0,0.25); color: #ffd33d; }
+
+main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32px 24px 64px 24px;
+}
+
+section { margin-bottom: 40px; }
+
+h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--accent);
+}
+
+ul { padding-left: 22px; }
+li { margin: 4px 0; }
+
+.dropzone {
+    border: 2px dashed var(--border);
+    border-radius: 8px;
+    padding: 32px;
+    text-align: center;
+    background: var(--code-bg);
+    transition: border-color 0.2s, background 0.2s;
+}
+.dropzone.dragover {
+    border-color: var(--accent);
+    background: var(--accent-light);
+}
+.dropzone button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.dropzone button:hover { background: #0a3d22; }
+
+audio { margin-top: 16px; width: 100%; }
+
+#comparison { overflow-x: auto; }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 12px;
+}
+th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+}
+th {
+    background: var(--code-bg);
+    font-weight: 600;
+    color: var(--fg);
+    border-bottom: 2px solid var(--accent);
+}
+tr:hover td { background: #f6f8fa; }
+
+.caveat {
+    background: var(--caveat-bg);
+    color: var(--caveat-fg);
+    padding: 10px 14px;
+    border-left: 4px solid #d4a72c;
+    border-radius: 4px;
+    font-size: 14px;
+    margin: 12px 0;
+}
+
+footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0 32px 0;
+    text-align: center;
+    color: #57606a;
+    font-size: 13px;
+    background: #f6f8fa;
+}
+footer p { margin: 4px 0; }

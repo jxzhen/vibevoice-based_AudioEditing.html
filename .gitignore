@@ -1,0 +1,11 @@
+# Audio samples (do not commit raw audio)
+samples/*.wav
+samples/*.mp3
+samples/*.flac
+samples/*.ogg
+
+# Generated / cache
+.cache/
+*.log
+.DS_Store
+Thumbs.db

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VibeVoice-based Audio Editing -- local experiment dashboard</title>
+<meta name="description" content="Local experiment dashboard for the side-project that combines MiniCPM-o and VibeVoice for ICASSP 2027 AEC. NOT the official submission.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="banner">
+    <div class="banner-inner">
+        <h1>VibeVoice-based Audio Editing</h1>
+        <p class="subtitle">Local experiment dashboard &middot; MiniCPM-o + VibeVoice hybrid</p>
+        <p class="caveat">
+            <strong>Side project.</strong> The official ICASSP 2027 AEC submission
+            lives at
+            <a href="https://github.com/jxzhen/aec-2027-editx-lora">jxzhen/aec-2027-editx-lora</a>
+            (LoRA on <code>stepfun-ai/Step-Audio-EditX</code>). This dashboard
+            tracks the side-project experiment that combines
+            <code>openbmb/MiniCPM-o</code> with <code>microsoft/VibeVoice</code>;
+            it does <em>not</em> affect the official grading chain.
+        </p>
+    </div>
+</header>
+
+<main>
+
+<section id="about">
+    <h2>What this dashboard does</h2>
+    <p>
+        Reads the JSON outputs produced by the sibling weight repo
+        (<a href="https://github.com/jxzhen/vibevoice-based_weight">jxzhen/vibevoice-based_weight</a>)
+        and lets the author (and anyone running the local experiment) eyeball
+        the numbers in a single page.
+    </p>
+    <ul>
+        <li><strong>Audio editing comparison</strong> &mdash; our MiniCPM-o + VibeVoice hybrid vs
+            <em>AudioEditor</em> (ICASSP 2025), <em>Audit</em> (NeurIPS 2023),
+            <em>InstructSpeech</em> (ICML 2024).</li>
+        <li><strong>ASR comparison</strong> &mdash; VibeVoice-ASR (7B) vs
+            Whisper large-v3 / turbo, Paraformer-v2.</li>
+        <li><strong>Goal</strong>: exceed ICASSP 2027 AEC SOTA
+            (AudioEditor: SI-SDR 13.1 / PESQ 2.94 / STOI 0.91)
+            with a small-model hybrid (<10B combined).</li>
+    </ul>
+</section>
+
+<section id="audio-edit">
+    <h2>1. Audio editing SOTA comparison</h2>
+    <p>
+        Loaded from <code>data/summary.json</code> (produced by
+        <code>benchmarks/audio_editing/aggregate.py</code>).
+        Target: exceed AudioEditor (ICASSP 2025) on SI-SDR / PESQ / STOI.
+    </p>
+    <div class="table-wrap">
+        <table id="aeTable">
+            <thead>
+                <tr>
+                    <th>System</th>
+                    <th>Audio</th>
+                    <th>Text instruction</th>
+                    <th>Region</th>
+                    <th>SI-SDR</th>
+                    <th>PESQ</th>
+                    <th>STOI</th>
+                    <th>Mel L1</th>
+                    <th>LSD</th>
+                    <th>Params B</th>
+                </tr>
+            </thead>
+            <tbody id="aeBody">
+                <tr><td colspan="10">Loading summary.json ...</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="legend">
+        Higher is better for SI-SDR / PESQ / STOI; lower is better for Mel L1 / LSD.
+    </p>
+</section>
+
+<section id="asr">
+    <h2>2. ASR comparison</h2>
+    <p>
+        Loaded from <code>data/asr_summary.json</code>. RTF is the
+        real-time factor; <strong>RTF &lt; 1</strong> means faster than
+        real time.
+    </p>
+    <div class="table-wrap">
+        <table id="asrTable">
+            <thead>
+                <tr>
+                    <th>System</th>
+                    <th>Audio</th>
+                    <th>Language</th>
+                    <th>Duration s</th>
+                    <th>Gen s</th>
+                    <th>RTF</th>
+                    <th>Params B</th>
+                    <th>Transcript excerpt</th>
+                </tr>
+            </thead>
+            <tbody id="asrBody">
+                <tr><td colspan="8">Loading asr_summary.json ...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section id="observations">
+    <h2>3. Observations</h2>
+    <ul>
+        <li>The official SOTA line on SI-SDR / PESQ / STOI is set by AudioEditor (ICASSP 2025).</li>
+        <li>The MiniCPM-o + VibeVoice hybrid combines a ~4B omni-modal LLM with a 7B audio LLM; combined ~9B.</li>
+        <li>If <code>summary.json</code> shows our row beating AudioEditor on any metric, the small-model hybrid hypothesis is supported.</li>
+        <li>Numbers refresh automatically when you re-run <code>aggregate.py</code> and reload the page.</li>
+    </ul>
+</section>
+
+</main>
+
+<footer>
+    <p>
+        Maintained by <a href="https://github.com/jxzhen">jxzhen</a>.
+        Dashboard code: MIT License. Benchmark numbers belong to their respective papers.
+    </p>
+    <p class="caveat">
+        This dashboard does <em>not</em> host any model weights. The
+        upstream models live in the
+        <a href="https://github.com/jxzhen/vibevoice-based_weight">sibling weight repo</a>
+        and the official ICASSP 2027 AEC submission lives at
+        <a href="https://github.com/jxzhen/aec-2027-editx-lora">jxzhen/aec-2027-editx-lora</a>.
+    </p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

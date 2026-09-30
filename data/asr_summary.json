@@ -1,0 +1,41 @@
+[
+  {
+    "system": "vibevoice-asr",
+    "model_id": "microsoft/VibeVoice-ASR",
+    "audio": "samples/tedlium_sample_001.wav",
+    "audio_seconds": 120.0,
+    "transcript": "[not yet run]",
+    "language": "en",
+    "generation_seconds": null,
+    "rtf": null,
+    "n_params_B": 7.0,
+    "device": "TBD",
+    "dtype": "bfloat16"
+  },
+  {
+    "system": "whisper-large-v3",
+    "model_id": "openai/whisper-large-v3",
+    "audio": "samples/tedlium_sample_001.wav",
+    "audio_seconds": 120.0,
+    "transcript": "[not yet run]",
+    "language": "en",
+    "generation_seconds": null,
+    "rtf": null,
+    "n_params_B": 1.55,
+    "device": "TBD",
+    "dtype": "float16"
+  },
+  {
+    "system": "whisper-turbo",
+    "model_id": "openai/whisper-large-v3-turbo",
+    "audio": "samples/tedlium_sample_001.wav",
+    "audio_seconds": 120.0,
+    "transcript": "[not yet run]",
+    "language": "en",
+    "generation_seconds": null,
+    "rtf": null,
+    "n_params_B": 0.81,
+    "device": "TBD",
+    "dtype": "float16"
+  }
+]
