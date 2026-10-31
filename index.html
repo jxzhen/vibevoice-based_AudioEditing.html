@@ -22,6 +22,18 @@
             <code>openbmb/MiniCPM-o</code> with <code>microsoft/VibeVoice</code>;
             it does <em>not</em> affect the official grading chain.
         </p>
+        <p class="caveat">
+            <strong>Metric scope.</strong> The numbers on this page are
+            <em>reference-signal metrics</em> (SI-SDR / PESQ / STOI / Mel L1 /
+            LSD) computed on one local clip. They are <strong>not</strong> the
+            official AEC metrics. The official ICASSP 2027 AEC metrics are
+            <strong>IFR</strong> (instruction fulfilment rate),
+            <strong>CR</strong> (content retention) and <strong>EMR</strong>
+            (exact-match rate), produced by the unmodified official evaluator
+            (<code>python -m eval.score</code>). Nothing in that metric space
+            is published here, and no number on this page should be read as an
+            AEC leaderboard score.
+        </p>
     </div>
 </header>
 
@@ -41,9 +53,14 @@
             <em>InstructSpeech</em> (ICML 2024).</li>
         <li><strong>ASR comparison</strong> &mdash; VibeVoice-ASR (7B) vs
             Whisper large-v3 / turbo, Paraformer-v2.</li>
-        <li><strong>Goal</strong>: exceed ICASSP 2027 AEC SOTA
-            (AudioEditor: SI-SDR 13.1 / PESQ 2.94 / STOI 0.91)
-            with a small-model hybrid (<10B combined).</li>
+        <li><strong>Goal</strong>: beat the published reference numbers of
+            <em>AudioEditor</em> (ICASSP 2025) on the reference-signal
+            metrics with a small-model hybrid. The reference numbers are
+            listed in <code>data/summary.json</code> with a per-row
+            <em>Provenance</em> column -- read it before using any of them,
+            because two of the rows carry values that could not be traced to
+            a primary source and are therefore not shown in the metric
+            columns.</li>
     </ul>
 </section>
 
@@ -52,7 +69,8 @@
     <p>
         Loaded from <code>data/summary.json</code> (produced by
         <code>benchmarks/audio_editing/aggregate.py</code>).
-        Target: exceed AudioEditor (ICASSP 2025) on SI-SDR / PESQ / STOI.
+        These are reference-signal metrics on a single local clip, not the
+        official AEC metrics.
     </p>
     <div class="table-wrap">
         <table id="aeTable">
@@ -68,15 +86,18 @@
                     <th>Mel L1</th>
                     <th>LSD</th>
                     <th>Params B</th>
+                    <th>Provenance</th>
                 </tr>
             </thead>
             <tbody id="aeBody">
-                <tr><td colspan="10">Loading summary.json ...</td></tr>
+                <tr><td colspan="11">Loading summary.json ...</td></tr>
             </tbody>
         </table>
     </div>
     <p class="legend">
         Higher is better for SI-SDR / PESQ / STOI; lower is better for Mel L1 / LSD.
+        A cell showing <strong>--</strong> means the value was not measured or
+        could not be verified, not zero.
     </p>
 </section>
 
@@ -111,9 +132,9 @@
 <section id="observations">
     <h2>3. Observations</h2>
     <ul>
-        <li>The official SOTA line on SI-SDR / PESQ / STOI is set by AudioEditor (ICASSP 2025).</li>
-        <li>The MiniCPM-o + VibeVoice hybrid combines a ~4B omni-modal LLM with a 7B audio LLM; combined ~9B.</li>
-        <li>If <code>summary.json</code> shows our row beating AudioEditor on any metric, the small-model hybrid hypothesis is supported.</li>
+        <li>AudioEditor (ICASSP 2025) reports FD / KL / FAD / IS / CLAP-cosine and MOS &mdash; it does <em>not</em> report SI-SDR / PESQ / STOI / Mel L1 / LSD. Any row here that claims AudioEditor numbers on those metrics is marked unverified.</li>
+        <li>The MiniCPM-o + VibeVoice hybrid is meant to combine a small omni-modal LLM with a 7B audio LLM. The exact combined parameter count is not asserted on this page.</li>
+        <li>If <code>summary.json</code> shows our row beating a reference row on any metric, the small-model hybrid hypothesis is supported &mdash; but only for rows whose <em>Provenance</em> says the value was actually measured locally.</li>
         <li>Numbers refresh automatically when you re-run <code>aggregate.py</code> and reload the page.</li>
     </ul>
 </section>
@@ -131,6 +152,16 @@
         <a href="https://github.com/jxzhen/vibevoice-based_weight">sibling weight repo</a>
         and the official ICASSP 2027 AEC submission lives at
         <a href="https://github.com/jxzhen/aec-2027-editx-lora">jxzhen/aec-2027-editx-lora</a>.
+    </p>
+    <p class="caveat">
+        Model versions, upstream release dates and per-file SHA-256 for every
+        component are pinned in
+        <a href="https://github.com/jxzhen/vibevoice-based_weight/tree/main/aec2027">vibevoice-based_weight/aec2027/</a>,
+        which also states why that directory deliberately holds no binary
+        weights: Track 2 Rule 1 requires the weights of all model components
+        to have been publicly released before November 1, 2026, and
+        re-uploading copies here would create a second, later exposure of the
+        same bytes.
     </p>
 </footer>
 

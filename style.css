@@ -159,3 +159,11 @@ footer {
     background: #f6f8fa;
 }
 footer p { margin: 4px 0; }
+
+td.prov {
+    font-size: 12px;
+    line-height: 1.45;
+    color: #57606a;
+    min-width: 260px;
+    max-width: 420px;
+}

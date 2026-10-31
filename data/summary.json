@@ -14,6 +14,7 @@
     "lsd": 14.2,
     "device": "n/a",
     "dtype": "n/a",
+    "provenance": "Local deterministic baseline: the masked region is silenced. Produced by the benchmark harness on samples/sample_001.wav; that clip is not committed to this repository, so the value cannot be re-derived from the repository alone.",
     "notes": "baseline: lower bound"
   },
   {
@@ -31,41 +32,58 @@
     "lsd": 0.0,
     "device": "n/a",
     "dtype": "n/a",
+    "provenance": "Local deterministic upper bound: the unedited audio is returned unchanged.",
     "notes": "upper bound (no edit applied)"
   },
   {
     "system": "audioeditor-icassp2025",
-    "audio": "samples/sample_001.wav",
+    "audio": null,
     "text_instruction": "replace with a soft pad synth",
     "region_start": 0.2,
     "region_end": 0.6,
     "output_audio": null,
     "n_params_B_total": null,
-    "si_sdr": 12.4,
-    "pesq": 2.85,
-    "stoi": 0.89,
-    "mel_l1": 0.18,
-    "lsd": 5.6,
+    "si_sdr": null,
+    "pesq": null,
+    "stoi": null,
+    "mel_l1": null,
+    "lsd": null,
+    "reported_values_unverified": {
+      "si_sdr": 12.4,
+      "pesq": 2.85,
+      "stoi": 0.89,
+      "mel_l1": 0.18,
+      "lsd": 5.6
+    },
     "device": "cuda",
     "dtype": "bfloat16",
-    "notes": "SOTA baseline -- numbers from Jia et al. ICASSP 2025 paper; re-runs pending"
+    "provenance": "Transcribed reference values, NOT reproduced locally. They were attributed to Jia et al., ICASSP 2025, but that paper reports FD / KL / FAD / IS / CLAP-cosine and MOS -- it does not report SI-SDR / PESQ / STOI / Mel L1 / LSD -- so these numbers could not be traced to a primary source. They are kept verbatim under reported_values_unverified, are left out of the metric columns on purpose, and must not be used as a comparison target.",
+    "notes": "reference row -- values unverified; re-runs pending"
   },
   {
     "system": "audit-neurips2023",
-    "audio": "samples/sample_001.wav",
+    "audio": null,
     "text_instruction": "replace with a soft pad synth",
     "region_start": 0.2,
     "region_end": 0.6,
     "output_audio": null,
     "n_params_B_total": null,
-    "si_sdr": 11.2,
-    "pesq": 2.71,
-    "stoi": 0.87,
-    "mel_l1": 0.21,
-    "lsd": 5.9,
+    "si_sdr": null,
+    "pesq": null,
+    "stoi": null,
+    "mel_l1": null,
+    "lsd": null,
+    "reported_values_unverified": {
+      "si_sdr": 11.2,
+      "pesq": 2.71,
+      "stoi": 0.87,
+      "mel_l1": 0.21,
+      "lsd": 5.9
+    },
     "device": "cuda",
     "dtype": "bfloat16",
-    "notes": "previous SOTA -- Wang et al. NeurIPS 2023; numbers from paper"
+    "provenance": "Transcribed reference values, NOT reproduced locally. They were attributed to Wang et al., NeurIPS 2023, but AUDIT reports FD / KL / FAD / IS and MOS -- not SI-SDR / PESQ / STOI / Mel L1 / LSD -- so these numbers could not be traced to a primary source. Kept verbatim under reported_values_unverified and excluded from the metric columns on purpose.",
+    "notes": "reference row -- values unverified"
   },
   {
     "system": "minicpm-o-vibevoice (ours)",
@@ -74,7 +92,7 @@
     "region_start": 0.2,
     "region_end": 0.6,
     "output_audio": null,
-    "n_params_B_total": 9.2,
+    "n_params_B_total": null,
     "si_sdr": null,
     "pesq": null,
     "stoi": null,
@@ -82,6 +100,7 @@
     "lsd": null,
     "device": "TBD",
     "dtype": "bfloat16",
-    "notes": "side-project local fine-tune -- numbers not yet collected; target > AudioEditor"
+    "provenance": "Not measured. No local run has been completed for this row, so every metric field is null by design. The combined parameter count is also left null: it was previously stated as 9.2 B, which could not be verified against the model cards of the two checkpoints this row is meant to combine.",
+    "notes": "side-project local hybrid -- not yet run"
   }
 ]

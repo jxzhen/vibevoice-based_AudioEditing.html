@@ -44,7 +44,7 @@
     function renderAudioEditing(rows) {
         var tbody = document.getElementById("aeBody");
         if (!rows || rows.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="10">No audio editing results yet. ' +
+            tbody.innerHTML = '<tr><td colspan="11">No audio editing results yet. ' +
                 'Run <code>benchmarks/audio_editing/aggregate.py</code> in the weight repo.</td></tr>';
             return;
         }
@@ -52,9 +52,15 @@
             var region = "[" + fmt(r.region_start) + ", " + fmt(r.region_end) + "] s";
             var params = (r.n_params_B_total === null || r.n_params_B_total === undefined)
                 ? "--" : fmt(r.n_params_B_total);
+            var audio = r.audio
+                ? "<code>" + escapeHtml(basename(r.audio)) + "</code>"
+                : "<em>n/a</em>";
+            var prov = r.provenance
+                ? escapeHtml(r.provenance)
+                : "<em>not stated</em>";
             return "<tr>" +
                 "<td><strong>" + escapeHtml(r.system || "") + "</strong></td>" +
-                "<td><code>" + escapeHtml(basename(r.audio)) + "</code></td>" +
+                "<td>" + audio + "</td>" +
                 "<td>" + escapeHtml((r.text_instruction || "").slice(0, 50)) + "</td>" +
                 "<td>" + escapeHtml(region) + "</td>" +
                 "<td>" + fmt(r.si_sdr) + "</td>" +
@@ -63,6 +69,7 @@
                 "<td>" + fmt(r.mel_l1) + "</td>" +
                 "<td>" + fmt(r.lsd) + "</td>" +
                 "<td>" + params + "</td>" +
+                "<td class=\"prov\">" + prov + "</td>" +
                 "</tr>";
         }).join("");
     }
